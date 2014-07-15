@@ -32,4 +32,5 @@ Git
 6. git push origin branch-name
 7. go to github and create a pull request for your branch
 8. merge pull request into master
-9. repeat steps 2-8
+9. git checkout master
+10. repeat steps 2-8
