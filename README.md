@@ -11,9 +11,9 @@ Make a request, get a response
 Data
 ====
 
-Pojo's for the data
-Connect to a database
-Dao's for the Pojo's
+1. Pojo's for the data
+2. Connect to a database
+3. Dao's for the Pojo's
 
 Algorithm
 =========
