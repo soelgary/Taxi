@@ -22,7 +22,6 @@ public class TaxiServiceApplication extends Application<TaxiServiceConfiguration
 	public void run(TaxiServiceConfiguration conf, Environment env)
 			throws Exception {
 		env.jersey().register(new TripResource());
-		
 	}
 
 }
