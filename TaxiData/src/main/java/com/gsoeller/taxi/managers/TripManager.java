@@ -22,8 +22,8 @@ public class TripManager {
 				Trip.class, String.class);
 	}
 	
-	public List<Trip> getAll() {
-		DBCursor<Trip> dbCursor = collection.find();
+	public List<Trip> getTrips(int limit) {
+		DBCursor<Trip> dbCursor = collection.find().limit(limit);
 		return Lists.newArrayList(dbCursor.iterator());
 	}
 	

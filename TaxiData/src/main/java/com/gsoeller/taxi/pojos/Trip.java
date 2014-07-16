@@ -1,5 +1,8 @@
 package com.gsoeller.taxi.pojos;
 
+import net.vz.mongodb.jackson.ObjectId;
+
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 public class Trip {
@@ -7,7 +10,14 @@ public class Trip {
 	private DateTime endTime;
 	private Location startLocation;
 	private Location endLocation;
-
+	private String id;
+	
+	@ObjectId
+	@JsonProperty("_id")
+	public String getId() {
+		return id;
+	}
+	
 	public DateTime getStartTime() {
 		return startTime;
 	}
