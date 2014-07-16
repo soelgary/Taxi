@@ -61,7 +61,7 @@ This endpoint will get you all of the trip objects stored in the database.
 
 This endpoint will create a new trip and return the trip that you created. An example json payload is below
 
-```
+```json
 {
   "startTime": 1373860800000, 
   "endTime": 1373947200000,
