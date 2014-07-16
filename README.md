@@ -43,7 +43,7 @@ Setup
 1. Install and run mongodb
 2. clone this repo
 3. Add this project to eclipse by importing an existing maven project
-4. install ```TaxiData``` and ```TaxiAlgorithms``` to your local maven repository by running these commands ```cd TaxiData``` and ```mvn clean install``. Repeat for ```TaxiAlgorithms```
+4. install ```TaxiData``` and ```TaxiAlgorithms``` to your local maven repository by running these commands ```cd TaxiData``` and ```mvn clean install```. Repeat for ```TaxiAlgorithms```
 5. Setup the run configuration in eclipse. Set the project to be ```TaxiService```. Set the main class to be ```com.gsoeller.taxi.TaxiService.TaxiServiceApplication```. Set the program arguments to be ```server```.
 6. Click run and you can send GET/POST requests to http://127.0.0.1/trip
 
