@@ -34,3 +34,62 @@ Git
 8. merge pull request into master
 9. git checkout master
 10. repeat steps 2-8
+
+Setup
+=====
+
+1. Install and run mongodb
+2. clone this repo
+3. Add this project to eclipse by importing an existing maven project
+4. install ```TaxiData``` and ```TaxiAlgorithms``` to your local maven repository by running these commands ```cd TaxiData``` and ```mvn clean install``. Repeat for ```TaxiAlgorithms```
+5. Setup the run configuration in eclipse. Set the project to be ```TaxiService```. Set the main class to be ```com.gsoeller.taxi.TaxiService.TaxiServiceApplication```. Set the program arguments to be ```server```.
+6. Click run and you can send GET/POST requests to http://127.0.0.1/trip
+
+
+API Endpoints
+=============
+
+This is a list of all the endpoints that you can hit and example payloads.
+
+```GET```
+```/trip```
+
+This endpoint will get you all of the trip objects stored in the database.
+
+```POST```
+```/trip```
+
+This endpoint will create a new trip and return the trip that you created. An example json payload is below
+
+```{
+  "startTime": 1373860800000, 
+  "endTime": 1373947200000,
+  "startLocation": {
+    "latitude": 50,
+    "longitude": 100
+  },
+  "endLocation": {
+    "latitude": 50,
+    "longitude": 100
+  }
+}```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
