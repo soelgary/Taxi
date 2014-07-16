@@ -6,8 +6,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.gsoeller.taxi.managers.TripManager;
 import com.gsoeller.taxi.pojos.Trip;
@@ -17,6 +19,7 @@ import com.gsoeller.taxi.pojos.Trip;
 public class TripResource {
 
 	private TripManager manager;
+	private final int DEFAULT_LIMIT = 100;
 	
 	@Inject
 	public TripResource(TripManager manager) {
@@ -24,8 +27,12 @@ public class TripResource {
 	}
 	
 	@GET
-	public List<Trip> getTrips() {
-		return manager.getAll();
+	public List<Trip> getTrips(@QueryParam("limit") Optional<Integer> limit) {
+		int actualLimit = DEFAULT_LIMIT;
+		if (limit.isPresent()) {
+			actualLimit = limit.get();
+		}
+		return manager.getTrips(actualLimit);
 	}
 	
 	@POST
