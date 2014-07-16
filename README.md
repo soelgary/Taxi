@@ -52,11 +52,11 @@ API Endpoints
 This is a list of all the endpoints that you can hit and example payloads.
 
 ```
-GET /trip
+GET /trip?limit=n
 ```
 
 
-This endpoint will get you all of the trip objects stored in the database.
+This endpoint will get you all of the trip objects stored in the database. ```limit``` is an optional query param that sets a limit on the number of trips to query for. The default is set to 100.
 
 ```
 POST /trip
