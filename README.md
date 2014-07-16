@@ -64,8 +64,19 @@ POST /trip
 
 This endpoint will create a new trip and return the trip that you created. An example json payload is below
 
-```javascript
-{"startTime": 1373860800000, "endTime": 1373947200000, "startLocation": { "latitude": 50, "longitude": 100}, "endLocation": { "latitude": 50, "longitude": 100 }}
+```json
+{
+  "startTime": 1373860800000, 
+  "endTime": 1373947200000, 
+  "startLocation": { 
+    "latitude": 50, 
+    "longitude": 100
+  }, 
+  "endLocation": { 
+    "latitude": 50, 
+    "longitude": 100 
+  }
+}
 ```
 
 
