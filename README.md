@@ -3,7 +3,7 @@ Taxi
 
 A service that predicts where people taking cabs will want to be dropped off in NYC
 
-url ```taxi.gsoeller.com/trip```
+url ```http://www.taxi.gsoeller.com/trip```
 
 Service
 =======
