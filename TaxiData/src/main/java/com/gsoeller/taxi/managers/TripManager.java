@@ -7,7 +7,6 @@ import net.vz.mongodb.jackson.DBCursor;
 import net.vz.mongodb.jackson.JacksonDBCollection;
 
 import com.google.common.collect.Lists;
-import com.gsoeller.taxi.pojos.Location;
 import com.gsoeller.taxi.pojos.Trip;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -34,7 +33,7 @@ public class TripManager {
 		return trip;
 	}
 	
-	public List<Trip> getTripsWithinRadius(Location location){
+	public List<Trip> getTripsWithinRadius(){
 		BasicDBObject query = new BasicDBObject();
 		query.put("startLocation.latitude", new BasicDBObject("$lt", 0));
 		DBCursor<Trip> cursor = collection.find(query);

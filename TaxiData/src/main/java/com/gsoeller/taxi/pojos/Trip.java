@@ -1,5 +1,7 @@
 package com.gsoeller.taxi.pojos;
 
+import java.util.List;
+
 import net.vz.mongodb.jackson.ObjectId;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -8,8 +10,8 @@ import org.joda.time.DateTime;
 public class Trip {
 	private DateTime startTime;
 	private DateTime endTime;
-	private Location startLocation;
-	private Location endLocation;
+	private List<Double> startLocation;
+	private List<Double> endLocation;
 	private String id;
 	
 	@ObjectId
@@ -34,19 +36,19 @@ public class Trip {
 		this.endTime = endTime;
 	}
 
-	public Location getStartLocation() {
+	public List<Double> getStartLocation() {
 		return startLocation;
 	}
 
-	public void setStartLocation(Location startLocation) {
+	public void setStartLocation(List<Double> startLocation) {
 		this.startLocation = startLocation;
 	}
 
-	public Location getEndLocation() {
+	public List<Double> getEndLocation() {
 		return endLocation;
 	}
 
-	public void setEndLocation(Location endLocation) {
+	public void setEndLocation(List<Double> endLocation) {
 		this.endLocation = endLocation;
 	}
 

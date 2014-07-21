@@ -43,6 +43,6 @@ public class TripResource {
 	@GET
 	@Path("/filter")
 	public List<Trip> filterTrips(){
-		return manager.getTripsWithinRadius(null);
+		return manager.getTripsWithinRadius();
 	}
 }

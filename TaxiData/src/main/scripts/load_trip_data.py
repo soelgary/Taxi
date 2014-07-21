@@ -26,6 +26,7 @@ def make_request(line):
     "startLocation": [pickup_lat, pickup_lon],
     "endLocation": [dropoff_lat, dropoff_lon]
   }
+  print payload
   headers = {'content-type': 'application/json'}
   r = requests.post(LOCAL_HOST + PATH, data=json.dumps(payload), headers=headers)
 
