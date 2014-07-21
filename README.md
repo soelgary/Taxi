@@ -81,7 +81,14 @@ This endpoint will create a new trip and return the trip that you created. An ex
 }
 ```
 
+Scripts
+=======
 
+```
+load_trip_data.py
+```
+
+This script is located in ```TaxiData/src/main/scripts``` and will add all the taxi data from a given script. Execute the script by running  ```./load_trip_data.py -i /path/to/file/with/trip/data.txt```
 
 
 
