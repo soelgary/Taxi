@@ -39,4 +39,10 @@ public class TripResource {
 	public Trip addTrip(Trip trip) {
 		return manager.createTrip(trip);
 	}
+	
+	@GET
+	@Path("/filter")
+	public List<Trip> filterTrips(){
+		return manager.getTripsWithinRadius(null);
+	}
 }

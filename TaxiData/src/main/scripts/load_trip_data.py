@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 from time import mktime
 
-LOCAL_HOST = 'http://127.0.0.1:9090'
+LOCAL_HOST = 'http://127.0.0.1:8080'
 
 PATH = '/trip'
 
