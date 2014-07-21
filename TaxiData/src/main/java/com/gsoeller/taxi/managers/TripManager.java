@@ -8,8 +8,10 @@ import net.vz.mongodb.jackson.JacksonDBCollection;
 
 import com.google.common.collect.Lists;
 import com.gsoeller.taxi.pojos.Trip;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 
@@ -34,9 +36,11 @@ public class TripManager {
 	}
 	
 	public List<Trip> getTripsWithinRadius(){
-		BasicDBObject query = new BasicDBObject();
-		query.put("startLocation.latitude", new BasicDBObject("$lt", 0));
-		DBCursor<Trip> cursor = collection.find(query);
-		return Lists.newArrayList(cursor.iterator());
+		BasicDBList locations = new BasicDBList();
+		DBCursor<Trip> mydoc = collection.find(new BasicDBObject("startLocation", 
+				new BasicDBObject("$near", 
+						new BasicDBObject("$geometry",
+								new BasicDBObject("type", "Point").append("coordinates", locations)).append("$maxDistance", 500))));
+		return Lists.newArrayList(mydoc.iterator());
 	}
 }
