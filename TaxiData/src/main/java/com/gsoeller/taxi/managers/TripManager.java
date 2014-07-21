@@ -36,7 +36,7 @@ public class TripManager {
 	
 	public List<Trip> getTripsWithinRadius(Location location){
 		BasicDBObject query = new BasicDBObject();
-		query.put("startTime", new BasicDBObject("$gt", 0));
+		query.put("startLocation.latitude", new BasicDBObject("$lt", 0));
 		DBCursor<Trip> cursor = collection.find(query);
 		return Lists.newArrayList(cursor.iterator());
 	}

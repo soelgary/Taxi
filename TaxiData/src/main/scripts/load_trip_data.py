@@ -23,14 +23,8 @@ def make_request(line):
   payload = {
     "startTime": start_time,
     "endTime": end_time,
-    "startLocation": {
-      "latitude": pickup_lat,
-      "longitude": pickup_lon
-    },
-    "endLocation": {
-      "latitude": dropoff_lat,
-      "longitude": dropoff_lon
-    }
+    "startLocation": [pickup_lat, pickup_lon],
+    "endLocation": [dropoff_lat, dropoff_lon]
   }
   headers = {'content-type': 'application/json'}
   r = requests.post(LOCAL_HOST + PATH, data=json.dumps(payload), headers=headers)
