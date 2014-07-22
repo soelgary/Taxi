@@ -47,4 +47,10 @@ public class TripResource {
 	public ArrayList<Trip> filterTrips(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
 		return manager.getTripsWithinRadius(lat, lon);
 	}
+	
+	@GET
+	@Path("/predict")
+	public void predictEndLocation(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
+		
+	}
 }
