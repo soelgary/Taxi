@@ -1,5 +1,6 @@
 package com.gsoeller.taxi.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -13,6 +14,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.gsoeller.taxi.managers.TripManager;
 import com.gsoeller.taxi.pojos.Trip;
+import com.mongodb.DBObject;
 
 @Path("/trip")
 @Produces(MediaType.APPLICATION_JSON)
@@ -42,7 +44,7 @@ public class TripResource {
 	
 	@GET
 	@Path("/filter")
-	public List<Trip> filterTrips(){
-		return manager.getTripsWithinRadius();
+	public ArrayList<Trip> filterTrips(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
+		return manager.getTripsWithinRadius(lat, lon);
 	}
 }
