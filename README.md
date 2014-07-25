@@ -68,16 +68,16 @@ This endpoint will create a new trip and return the trip that you created. An ex
 
 ```json
 {
-  "startTime": 1373860800000, 
-  "endTime": 1373947200000, 
-  "startLocation": { 
-    "latitude": 50, 
-    "longitude": 100
+  "endLocation": {
+    "type": "Point",
+    "coordinates": [1.8761, 2.2874]
   }, 
-  "endLocation": { 
-    "latitude": 50, 
-    "longitude": 100 
-  }
+  "endTime": 1357681356, 
+  "startLocation": {
+    "type": "Point",
+    "coordinates": [1.1, 2.2]
+  }, 
+  "startTime": 1357680958
 }
 ```
 
