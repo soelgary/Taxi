@@ -2,6 +2,8 @@ package com.gsoeller.taxi.TaxiService;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.gsoeller.taxi.TaxiAlgorithms.PredictionAlgorithms;
+import com.gsoeller.taxi.TaxiAlgorithms.PredictionModule;
 import com.gsoeller.taxi.TaxiData.DataModule;
 import com.gsoeller.taxi.managers.TripManager;
 import com.gsoeller.taxi.resources.TripResource;
@@ -25,8 +27,8 @@ public class TaxiServiceApplication extends Application<TaxiServiceConfiguration
 	@Override
 	public void run(TaxiServiceConfiguration conf, Environment env)
 			throws Exception {
-		Injector injector = Guice.createInjector(new DataModule());
-		env.jersey().register(new TripResource(injector.getInstance(TripManager.class)));
+		Injector injector = Guice.createInjector(new DataModule(), new PredictionModule());
+		env.jersey().register(new TripResource(injector.getInstance(TripManager.class), injector.getInstance(PredictionAlgorithms.class)));
 	}
 
 }

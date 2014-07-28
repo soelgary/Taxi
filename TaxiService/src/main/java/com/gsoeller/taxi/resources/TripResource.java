@@ -11,10 +11,12 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.gsoeller.taxi.TaxiAlgorithms.PredictionAlgorithms;
 import com.gsoeller.taxi.managers.TripManager;
+import com.gsoeller.taxi.pojos.Location;
 import com.gsoeller.taxi.pojos.Trip;
-import com.mongodb.DBObject;
 
 @Path("/trip")
 @Produces(MediaType.APPLICATION_JSON)
@@ -22,10 +24,12 @@ public class TripResource {
 
 	private TripManager manager;
 	private final int DEFAULT_LIMIT = 100;
+	private PredictionAlgorithms algorithms;
 	
 	@Inject
-	public TripResource(TripManager manager) {
+	public TripResource(TripManager manager, PredictionAlgorithms algorithms) {
 		this.manager = manager;
+		this.algorithms = algorithms;
 	}
 	
 	@GET
@@ -50,7 +54,10 @@ public class TripResource {
 	
 	@GET
 	@Path("/predict")
-	public void predictEndLocation(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
-		
+	public Location predictEndLocation(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
+		Location loc = new Location();
+		loc.setCoordinates(Lists.newArrayList(lat, lon));
+		loc.setType("Point");
+		return algorithms.predictLocation(loc);
 	}
 }

@@ -1,5 +1,10 @@
 package com.gsoeller.taxi.TaxiAlgorithms;
 
-public class PredictionAlgorithms {
+import com.gsoeller.taxi.pojos.Location;
 
+public class PredictionAlgorithms {
+	
+	public Location predictLocation(Location start) {
+		return start;
+	}
 }
