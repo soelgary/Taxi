@@ -1,8 +1,7 @@
 package com.gsoeller.taxi.pojos;
 
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Objects;
 
 public class Location {
 
@@ -25,13 +24,17 @@ public class Location {
 		this.coordinates = coordinates;
 	}
 	
-	@JsonIgnore
-	public double getLatitude() {
-		return coordinates.get(0);
+	
+	public boolean equals(Object that) {
+		if (that instanceof Location) {
+			Location thatLocation = (Location)that;
+			return thatLocation.getType().equals(this.getType()) &&
+					thatLocation.getCoordinates().equals(this.getCoordinates());
+		}
+		return false;
 	}
 	
-	@JsonIgnore
-	public double getLongitude() {
-		return coordinates.get(1);
+	public int hashCode() {
+		return Objects.hashCode(getType()) + Objects.hashCode(getCoordinates());
 	}
 }

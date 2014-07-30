@@ -20,24 +20,31 @@ def make_request(line):
   pickup_lon = float(split[11].strip())
   dropoff_lat = float(split[12].strip())
   dropoff_lon = float(split[13].strip())
-  payload = {
-    "startTime": start_time,
-    "endTime": end_time,
-    "startLocation": {
-      "type" : "Point",
-      "coordinates": [pickup_lat, pickup_lon]
-    },
-    "endLocation": {
-      "type" : "Point",
-      "coordinates": [dropoff_lat, dropoff_lon]
+  if pickup_lat < 90 and pickup_lat > -90 and dropoff_lat < 90 and dropoff_lat > -90 and pickup_lon < 180 and dropoff_lon > -180:
+    payload = {
+      "startTime": start_time,
+      "endTime": end_time,
+      "startLocation": {
+        "type" : "Point",
+        "coordinates": [pickup_lat, pickup_lon]
+      },
+      "endLocation": {
+        "type" : "Point",
+        "coordinates": [dropoff_lat, dropoff_lon]
+      }
     }
-  }
-  headers = {'content-type': 'application/json'}
-  r = requests.post(LOCAL_HOST + PATH, data=json.dumps(payload), headers=headers)
+    headers = {'content-type': 'application/json'}
+    r = requests.post(LOCAL_HOST + PATH, data=json.dumps(payload), headers=headers)
+  else:
+    print "invalid lat/long " + str(pickup_lat) + " " + str(dropoff_lat) + " " + str(pickup_lon) + " " + str(dropoff_lon)
 
 def load_trip_data(inputfile):
+  skippedFirstLine = False
   for line in open(inputfile):
-    make_request(line)
+    if skippedFirstLine:
+      make_request(line)
+    else:
+      skippedFirstLine = True
 
 
 def main(argv):

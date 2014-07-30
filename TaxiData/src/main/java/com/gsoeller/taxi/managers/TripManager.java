@@ -18,7 +18,7 @@ import com.mongodb.MongoException;
 
 public class TripManager {
 	private JacksonDBCollection<Trip, String> collection;
-	private final int MAX_DISTANCE_IN_METERS = 8000;
+	private final int MAX_DISTANCE_IN_METERS = 50;
 	
 	public TripManager() throws UnknownHostException, MongoException {
 		Mongo mongo = new Mongo("127.0.0.1", 27017);
@@ -38,10 +38,10 @@ public class TripManager {
 		return trip;
 	}
 
-	public ArrayList<Trip> getTripsWithinRadius(Location location) {
+	public List<Trip> getTripsWithinRadius(Location location) {
 		BasicDBList locations = new BasicDBList();
-		locations.put(0, location.getLatitude());
-		locations.put(1, location.getLongitude());
+		locations.put(0, location.getCoordinates().get(0));
+		locations.put(1, location.getCoordinates().get(1));
 		DBCursor<Trip> mydoc = collection.find(new BasicDBObject("startLocation",
 				new BasicDBObject("$near", new BasicDBObject("$geometry",
 						new BasicDBObject("type", "Point").append(
@@ -49,4 +49,5 @@ public class TripManager {
 						"$maxDistance", MAX_DISTANCE_IN_METERS))));
 		return Lists.newArrayList(mydoc.iterator());
 	}
+	
 }

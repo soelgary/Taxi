@@ -48,7 +48,7 @@ public class TripResource {
 	
 	@GET
 	@Path("/filter")
-	public ArrayList<Trip> filterTrips(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
+	public List<Trip> filterTrips(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
 		Location loc = new Location();
 		loc.setCoordinates(Lists.newArrayList(lat, lon));
 		loc.setType("Point");
