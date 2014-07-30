@@ -8,6 +8,7 @@ import net.vz.mongodb.jackson.DBCursor;
 import net.vz.mongodb.jackson.JacksonDBCollection;
 
 import com.google.common.collect.Lists;
+import com.gsoeller.taxi.pojos.Location;
 import com.gsoeller.taxi.pojos.Trip;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -17,7 +18,7 @@ import com.mongodb.MongoException;
 
 public class TripManager {
 	private JacksonDBCollection<Trip, String> collection;
-	private final int MAX_DISTANCE_IN_METERS = 80;
+	private final int MAX_DISTANCE_IN_METERS = 8000;
 	
 	public TripManager() throws UnknownHostException, MongoException {
 		Mongo mongo = new Mongo("127.0.0.1", 27017);
@@ -37,10 +38,10 @@ public class TripManager {
 		return trip;
 	}
 
-	public ArrayList<Trip> getTripsWithinRadius(double latitude, double longitude) {
+	public ArrayList<Trip> getTripsWithinRadius(Location location) {
 		BasicDBList locations = new BasicDBList();
-		locations.put(0, latitude);
-		locations.put(1, longitude);
+		locations.put(0, location.getLatitude());
+		locations.put(1, location.getLongitude());
 		DBCursor<Trip> mydoc = collection.find(new BasicDBObject("startLocation",
 				new BasicDBObject("$near", new BasicDBObject("$geometry",
 						new BasicDBObject("type", "Point").append(

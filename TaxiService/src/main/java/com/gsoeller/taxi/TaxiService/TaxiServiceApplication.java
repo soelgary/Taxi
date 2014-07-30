@@ -28,7 +28,8 @@ public class TaxiServiceApplication extends Application<TaxiServiceConfiguration
 	public void run(TaxiServiceConfiguration conf, Environment env)
 			throws Exception {
 		Injector injector = Guice.createInjector(new DataModule(), new PredictionModule());
-		env.jersey().register(new TripResource(injector.getInstance(TripManager.class), injector.getInstance(PredictionAlgorithms.class)));
+		TripManager tripManager = injector.getInstance(TripManager.class);
+		env.jersey().register(new TripResource(tripManager, new PredictionAlgorithms(tripManager)));
 	}
 
 }
