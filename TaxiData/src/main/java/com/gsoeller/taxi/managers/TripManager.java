@@ -18,7 +18,7 @@ import com.mongodb.MongoException;
 
 public class TripManager {
 	private JacksonDBCollection<Trip, String> collection;
-	private final int MAX_DISTANCE_IN_METERS = 50;
+	private final int MAX_DISTANCE_IN_METERS = 1000000;
 	
 	public TripManager() throws UnknownHostException, MongoException {
 		Mongo mongo = new Mongo("127.0.0.1", 27017);
