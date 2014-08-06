@@ -1,6 +1,5 @@
 package com.gsoeller.taxi.resources;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -57,7 +56,7 @@ public class TripResource {
 	
 	@GET
 	@Path("/predict")
-	public Location predictEndLocation(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
+	public Optional<Location> predictEndLocation(@QueryParam("latitude") double lat, @QueryParam("longitude") double lon){
 		Location loc = new Location();
 		loc.setCoordinates(Lists.newArrayList(lat, lon));
 		loc.setType("Point");

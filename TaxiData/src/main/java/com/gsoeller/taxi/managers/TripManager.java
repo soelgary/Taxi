@@ -1,7 +1,6 @@
 package com.gsoeller.taxi.managers;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.vz.mongodb.jackson.DBCursor;
@@ -18,7 +17,7 @@ import com.mongodb.MongoException;
 
 public class TripManager {
 	private JacksonDBCollection<Trip, String> collection;
-	private final int MAX_DISTANCE_IN_METERS = 1000000;
+	private final int MAX_DISTANCE_IN_METERS = 1000;
 	
 	public TripManager() throws UnknownHostException, MongoException {
 		Mongo mongo = new Mongo("127.0.0.1", 27017);

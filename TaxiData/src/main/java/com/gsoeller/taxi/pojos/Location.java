@@ -8,6 +8,13 @@ public class Location {
 	private String type;
 	private List<Double> coordinates;
 	
+	public Location() {}
+	
+	public Location(List<Double> coordinates) {
+		this.coordinates = coordinates;
+		this.type = "Point";
+	}
+
 	public String getType() {
 		return type;
 	}
