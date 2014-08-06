@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.gsoeller.taxi.TaxiAlgorithms.PredictionAlgorithms;
@@ -43,6 +44,10 @@ public class TripResource {
 	
 	@POST
 	public Trip addTrip(Trip trip) {
+		Preconditions.checkArgument(trip.getStartLocation().getCoordinates().get(0) > 33 && 
+				trip.getStartLocation().getCoordinates().get(0) < 47, "Not within latitude range", trip);
+		Preconditions.checkArgument(trip.getStartLocation().getCoordinates().get(1) > -67 && 
+				trip.getStartLocation().getCoordinates().get(1) <  -80, "Not within longitude range", trip);
 		return manager.createTrip(trip);
 	}
 	
