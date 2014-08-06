@@ -44,10 +44,15 @@ public class TripResource {
 	
 	@POST
 	public Trip addTrip(Trip trip) {
-		Preconditions.checkArgument(trip.getStartLocation().getCoordinates().get(0) > 33 && 
-				trip.getStartLocation().getCoordinates().get(0) < 47, "Not within latitude range", trip);
-		Preconditions.checkArgument(trip.getStartLocation().getCoordinates().get(1) > -67 && 
-				trip.getStartLocation().getCoordinates().get(1) <  -80, "Not within longitude range", trip);
+		Preconditions.checkArgument(trip.getStartLocation().getCoordinates().get(0) > 33 &&
+				trip.getStartLocation().getCoordinates().get(0) < 47, "Start not within latitude range", trip.getStartLocation().getCoordinates().get(0));
+		Preconditions.checkArgument(trip.getStartLocation().getCoordinates().get(1) < -67 && 
+				trip.getStartLocation().getCoordinates().get(1) > -80, "Start not within longitude range", trip.getStartLocation().getCoordinates().get(1));
+		
+		Preconditions.checkArgument(trip.getEndLocation().getCoordinates().get(0) > 33 &&
+				trip.getEndLocation().getCoordinates().get(0) < 47, "End not within latitude range", trip.getEndLocation().getCoordinates().get(0));
+		Preconditions.checkArgument(trip.getEndLocation().getCoordinates().get(1) < -67 && 
+				trip.getEndLocation().getCoordinates().get(1) > -80, "End not within longitude range", trip.getEndLocation().getCoordinates().get(1));
 		return manager.createTrip(trip);
 	}
 	
