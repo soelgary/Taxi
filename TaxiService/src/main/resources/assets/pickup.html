@@ -65,7 +65,7 @@
       function successfullPrediction(response) {
         pickupMarker.unbindPopup();
         dropoffMarker
-          .setLatLng([response.attributes.coordinates[1], response.attributes.coordinates[0]])
+          .setLatLng([response.attributes.coordinates[0], response.attributes.coordinates[1]])
           .addTo(map);
         console.log('success');
       }

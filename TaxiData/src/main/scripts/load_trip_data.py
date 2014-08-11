@@ -18,10 +18,10 @@ def make_request(line):
   end_time = int(time.mktime(datetime.fromtimestamp(mktime(time.strptime(split[6].strip(), '%Y-%m-%j %H:%M:%S'))).timetuple()))
   num_passengers = split[7]
   #return int(num_passengers)
-  pickup_lat = float(split[10].strip())
-  pickup_lon = float(split[11].strip())
-  dropoff_lat = float(split[12].strip())
-  dropoff_lon = float(split[13].strip())
+  pickup_lon = float(split[10].strip())
+  pickup_lat = float(split[11].strip())
+  dropoff_lon = float(split[12].strip())
+  dropoff_lat = float(split[13].strip())
   if pickup_lat < 90 and pickup_lat > -90 and dropoff_lat < 90 and dropoff_lat > -90 and pickup_lon < 180 and dropoff_lon > -180:
     payload = {
       "startTime": start_time,

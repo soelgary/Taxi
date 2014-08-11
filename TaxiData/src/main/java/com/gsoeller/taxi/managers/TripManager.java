@@ -39,8 +39,8 @@ public class TripManager {
 
 	public List<Trip> getTripsWithinRadius(Location location) {
 		BasicDBList locations = new BasicDBList();
-		locations.put(0, location.getCoordinates().get(0));
-		locations.put(1, location.getCoordinates().get(1));
+		locations.put(0, location.getCoordinates().get(1));
+		locations.put(1, location.getCoordinates().get(0));
 		DBCursor<Trip> mydoc = collection.find(new BasicDBObject("startLocation",
 				new BasicDBObject("$near", new BasicDBObject("$geometry",
 						new BasicDBObject("type", "Point").append(
