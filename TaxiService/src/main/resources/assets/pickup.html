@@ -63,10 +63,20 @@
       map.on('click', onMapClick);
 
       function successfullPrediction(response) {
-        pickupMarker.unbindPopup();
+        pickupMarker.closePopup();
+        pickupMarker.unbindPopup()
+        pickupMarker
+          .bindPopup("<p class='black center'>Start</p>")
+          .openPopup();
+
         dropoffMarker
           .setLatLng([response.attributes.coordinates[0], response.attributes.coordinates[1]])
           .addTo(map);
+        
+        dropoffMarker
+          .bindPopup("<p class='black center'>End</p>")
+          .openPopup()
+        
         console.log('success');
       }
 

@@ -120,3 +120,7 @@
   background: #333;
   border: none;
 }
+
+.center {
+  text-align: center;
+}
