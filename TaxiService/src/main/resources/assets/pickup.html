@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NYC Taxi Predictions</title>
+    <link rel='stylesheet' href="css/bootstrap.css">
+    <link rel='stylesheet' href="css/bootstrap-theme.css">
+    <link rel='stylesheet' href="css/cover.css">
+    <link rel='stylesheet' href="css/custom.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/backbone-min.js"></script>
+    <script src="js/handlebars-v1.3.0.js"></script>
+    <script data-main="main" src="js/require.min.js"></script>
+    <script src="js/text.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Taxi Predictions</h1>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div id='map'></div>  
+    </div>
+
+    <script>
+      var map = L.map('map').setView([42, -71], 4);
+      var Stamen_Watercolor = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.jpg', {
+        //attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        subdomains: 'abcd',
+        minZoom: 3,
+        maxZoom: 16
+      });
+    
+      Stamen_Watercolor.addTo(map);
+      var pickupPopup = L.popup();
+      var pickupMarker = L.marker();
+      var dropoffMarker = L.marker();
+
+      function onMapClick(e) {
+        map.removeLayer(dropoffMarker);
+        pickupMarker
+          .setLatLng(e.latlng)
+          .addTo(map)
+          .bindPopup("<p class='black'>You clicked the map at " + e.latlng.toString() + "</p><p class='black text-center'><button onclick='predict(" + e.latlng.lat + ", " + e.latlng.lng + ");'>Predict!</button></p>")
+          .openPopup();
+
+
+      }
+
+      map.on('click', onMapClick);
+
+      function successfullPrediction(response) {
+        pickupMarker.unbindPopup();
+        dropoffMarker
+          .setLatLng([response.attributes.coordinates[1], response.attributes.coordinates[0]])
+          .addTo(map);
+        console.log('success');
+      }
+
+      function errorOnPrediction(response) {
+        pickupMarker
+          .unbindPopup();
+
+        console.log('error');
+      }
+
+      var Prediction = Backbone.Model.extend({
+        url: '/api/trip/predict',
+      });
+
+      function predict(lat, lon) {
+        console.log(lat);
+        console.log(lon);
+        var prediction = new Prediction();
+        prediction.fetch(
+          {
+            'data': {
+              'latitude': lon,
+              'longitude': lat
+            },
+            'success': successfullPrediction,
+            'error': errorOnPrediction
+          });
+      }
+
+
+    </script>
+    
+  </body>
+</html>

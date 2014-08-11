@@ -7,9 +7,9 @@ import time
 from datetime import datetime
 from time import mktime
 
-LOCAL_HOST = 'http://127.0.0.1:8080'
+LOCAL_HOST = 'http://127.0.0.1:9095'
 
-PATH = '/trip'
+PATH = '/api/trip'
 
 
 def make_request(line):

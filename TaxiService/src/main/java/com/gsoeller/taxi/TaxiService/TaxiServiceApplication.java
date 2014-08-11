@@ -9,6 +9,7 @@ import com.gsoeller.taxi.managers.TripManager;
 import com.gsoeller.taxi.resources.TripResource;
 
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
@@ -20,7 +21,9 @@ public class TaxiServiceApplication extends Application<TaxiServiceConfiguration
 	
 	@Override
 	public void initialize(Bootstrap<TaxiServiceConfiguration> bootstrap) {
-		// TODO Auto-generated method stub
+		bootstrap.addBundle(new AssetsBundle("/assets/", "/"));
+		bootstrap.addBundle(new AssetsBundle("/assets/css", "/css", null, "css"));
+		bootstrap.addBundle(new AssetsBundle("/assets/js", "/css", null, "js"));
 		
 	}
 
@@ -30,6 +33,7 @@ public class TaxiServiceApplication extends Application<TaxiServiceConfiguration
 		Injector injector = Guice.createInjector(new DataModule(), new PredictionModule());
 		TripManager tripManager = injector.getInstance(TripManager.class);
 		env.jersey().register(new TripResource(tripManager, new PredictionAlgorithms(tripManager)));
+		env.jersey().setUrlPattern("/api/*");
 	}
 
 }
